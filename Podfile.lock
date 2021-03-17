@@ -1,4 +1,7 @@
 PODS:
+  - R.swift (5.3.1):
+    - R.swift.Library (~> 5.3.0)
+  - R.swift.Library (5.3.0)
   - RxCocoa (6.0.0):
     - RxRelay (= 6.0.0)
     - RxSwift (= 6.0.0)
@@ -11,6 +14,7 @@ PODS:
   - SVProgressHUD (2.2.5)
 
 DEPENDENCIES:
+  - R.swift
   - RxCocoa
   - RxSwift
   - SDWebImage
@@ -18,6 +22,8 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - R.swift
+    - R.swift.Library
     - RxCocoa
     - RxRelay
     - RxSwift
@@ -25,12 +31,14 @@ SPEC REPOS:
     - SVProgressHUD
 
 SPEC CHECKSUMS:
+  R.swift: 56ec7e3aef34b9eee47a659e42462db2c1cc5ac3
+  R.swift.Library: 0fc583cb55a99e28901299cc451614cad1161962
   RxCocoa: 3f79328fafa3645b34600f37c31e64c73ae3a80e
   RxRelay: 8d593be109c06ea850df027351beba614b012ffb
   RxSwift: c14e798c59b9f6e9a2df8fd235602e85cc044295
   SDWebImage: e378178472b735e84b007bfb55514c97948a0598
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
 
-PODFILE CHECKSUM: d5c8e063ed582956cd48929a782cf8d47c63b782
+PODFILE CHECKSUM: a37aff92fd3027c01c98f4aa008ad7ee0dc66d97
 
 COCOAPODS: 1.10.1

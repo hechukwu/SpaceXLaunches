@@ -3,12 +3,11 @@ import Foundation
 public struct SpaceXLaunches: Codable {
     var fairings: Fairings?
     var links: Links?
-    var static_fire_date_utc, rocket, details, launchpad, name, date_utc, date_local, date_precision, id: String?
-//    var static_fire_date_unix: Any?
+    var static_fire_date_utc, rocket, details, launchpad, name, date_local, date_precision, id: String?
     var tdb, net, success, auto_update, upcoming: Bool?
     var window, flight_number: Int?
+    var date_utc: Date
     var crew, ships, capsules, payloads: [String]?
-//    var date_unix: Int32
     var cores: [Core]?
 }
 
@@ -39,4 +38,15 @@ struct Core: Codable {
     var core, landing_type, landpad: String?
     var flight: Int?
     var gridfins, legs, reused, landing_attempt, landing_success: Bool?
+}
+
+extension DateFormatter {
+  static let iso8601Full: DateFormatter = {
+    let formatter = DateFormatter()
+    formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"
+    formatter.calendar = Calendar(identifier: .iso8601)
+    formatter.timeZone = TimeZone(secondsFromGMT: 0)
+    formatter.locale = Locale(identifier: "en_US_POSIX")
+    return formatter
+  }()
 }

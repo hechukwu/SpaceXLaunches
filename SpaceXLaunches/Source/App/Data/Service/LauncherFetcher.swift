@@ -44,8 +44,10 @@ public class LauncherFetcher {
                 let responseString = String(data: data, encoding: .utf8)
                 guard let result = responseString else { return }
 //                let jsonData = data.data(using: .utf8)
+                let decoder = JSONDecoder()
+                decoder.dateDecodingStrategy = .formatted(.iso8601Full)
 
-                let rawDict = try JSONDecoder().decode(T.self , from: data)
+                let rawDict = try decoder.decode(T.self , from: data)
 
                 completion?(.success(rawDict))
 

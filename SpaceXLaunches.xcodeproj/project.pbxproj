@@ -25,6 +25,8 @@
 		47F5234626016E0F00E45FBD /* SpaceXClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F5234526016E0F00E45FBD /* SpaceXClient.swift */; };
 		47F523E226022FD600E45FBD /* LaunchesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F523E026022FD600E45FBD /* LaunchesCell.swift */; };
 		47F523E326022FD600E45FBD /* LaunchesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47F523E126022FD600E45FBD /* LaunchesCell.xib */; };
+		47F5242726027C4500E45FBD /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F5242626027C4500E45FBD /* R.generated.swift */; };
+		47F5242A26028A3400E45FBD /* SpaceXDetailLaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F5242926028A3300E45FBD /* SpaceXDetailLaunchViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +50,9 @@
 		47F5234526016E0F00E45FBD /* SpaceXClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceXClient.swift; sourceTree = "<group>"; };
 		47F523E026022FD600E45FBD /* LaunchesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchesCell.swift; sourceTree = "<group>"; };
 		47F523E126022FD600E45FBD /* LaunchesCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LaunchesCell.xib; sourceTree = "<group>"; };
+		47F5242626027C4500E45FBD /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
+		47F5242926028A3300E45FBD /* SpaceXDetailLaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceXDetailLaunchViewController.swift; sourceTree = "<group>"; };
+		47F5242C26028DDE00E45FBD /* SpaceXLaunches-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SpaceXLaunches-Bridging-Header.h"; sourceTree = "<group>"; };
 		704D8F08D779DC6B67EB8A28 /* Pods_SpaceXLaunches.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SpaceXLaunches.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B488C888D2BA2F02BD07D298 /* Pods-SpaceXLaunches.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpaceXLaunches.release.xcconfig"; path = "Target Support Files/Pods-SpaceXLaunches/Pods-SpaceXLaunches.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -88,6 +93,8 @@
 				47F5231F26015B7B00E45FBD /* Source */,
 				47F5231926015A1400E45FBD /* Application */,
 				47F523082600D01700E45FBD /* Info.plist */,
+				47F5242626027C4500E45FBD /* R.generated.swift */,
+				47F5242C26028DDE00E45FBD /* SpaceXLaunches-Bridging-Header.h */,
 			);
 			path = SpaceXLaunches;
 			sourceTree = "<group>";
@@ -144,6 +151,7 @@
 				47F5232B26015F2000E45FBD /* Cell */,
 				47F522FB2600D01500E45FBD /* SpaceXLaunchesViewController.swift */,
 				47F522FD2600D01500E45FBD /* Main.storyboard */,
+				47F5242926028A3300E45FBD /* SpaceXDetailLaunchViewController.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -244,6 +252,7 @@
 			buildConfigurationList = 47F5230B2600D01700E45FBD /* Build configuration list for PBXNativeTarget "SpaceXLaunches" */;
 			buildPhases = (
 				B431C34B4A1A64B17C99E9FB /* [CP] Check Pods Manifest.lock */,
+				47F52420260276B100E45FBD /* ShellScript */,
 				47F522F02600D01500E45FBD /* Sources */,
 				47F522F12600D01500E45FBD /* Frameworks */,
 				47F522F22600D01500E45FBD /* Resources */,
@@ -269,6 +278,7 @@
 				TargetAttributes = {
 					47F522F32600D01500E45FBD = {
 						CreatedOnToolsVersion = 12.4;
+						LastSwiftMigration = 1240;
 					};
 				};
 			};
@@ -305,6 +315,25 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		47F52420260276B100E45FBD /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$TEMP_DIR/rswift-lastrun",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				$SRCROOT/R.generated.swift,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"$PODS_ROOT/R.swift/rswift\" generate \"$SRCROOT/R.generated.swift\"\n";
+		};
 		8A675E1752A0263BE12FDE9D /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -352,10 +381,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				47F5232526015BF500E45FBD /* BaseViewController.swift in Sources */,
+				47F5242726027C4500E45FBD /* R.generated.swift in Sources */,
 				47F522FC2600D01500E45FBD /* SpaceXLaunchesViewController.swift in Sources */,
 				47F523332601631D00E45FBD /* SpaceService.swift in Sources */,
 				47F522F82600D01500E45FBD /* AppDelegate.swift in Sources */,
 				47F5234626016E0F00E45FBD /* SpaceXClient.swift in Sources */,
+				47F5242A26028A3400E45FBD /* SpaceXDetailLaunchViewController.swift in Sources */,
 				47F5232E26015FD000E45FBD /* SpaceXLaunchesViewModel.swift in Sources */,
 				47F523022600D01500E45FBD /* SpaceXLaunches.xcdatamodeld in Sources */,
 				47F5233F2601674C00E45FBD /* SpaceXLaunches.swift in Sources */,
@@ -511,6 +542,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JPNBUYVTC7;
 				INFOPLIST_FILE = SpaceXLaunches/Info.plist;
@@ -520,6 +552,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = henry.SpaceXLaunches;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SpaceXLaunches/SpaceXLaunches-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -531,6 +565,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JPNBUYVTC7;
 				INFOPLIST_FILE = SpaceXLaunches/Info.plist;
@@ -540,6 +575,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = henry.SpaceXLaunches;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SpaceXLaunches/SpaceXLaunches-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

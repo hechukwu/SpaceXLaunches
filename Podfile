@@ -10,5 +10,6 @@ target 'SpaceXLaunches' do
   pod 'RxCocoa'
   pod 'SDWebImage'
   pod 'SVProgressHUD'
+  pod 'R.swift'
 
 end
