@@ -36,6 +36,7 @@ class RocketLaunchViewController: BaseViewController {
         })
 
         viewModel?.error.bind({ status in
+            ProgressDialog.hide()
             if status {
                 self.showAlertDialog(title: "Error", message: self.viewModel?.errorMessage.value)
                 self.collectionView.isHidden = true
