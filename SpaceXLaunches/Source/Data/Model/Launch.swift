@@ -1,6 +1,6 @@
 import Foundation
 
-public struct SpaceXLaunches: Codable {
+public struct Launch: Codable {
     var fairings: Fairings?
     var links: Links?
     var static_fire_date_utc, rocket, details, launchpad, name, date_local, date_precision, id: String?

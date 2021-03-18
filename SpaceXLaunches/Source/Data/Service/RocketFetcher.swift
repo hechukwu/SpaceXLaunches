@@ -1,6 +1,6 @@
 import Foundation
 
-public class LauncherFetcher {
+public class RocketFetcher {
 
     // MARK: properties
 
@@ -15,21 +15,12 @@ public class LauncherFetcher {
         self.service = service
     }
 
-    public func fetchRocketLaunches(completion: @escaping (Result<[SpaceXLaunches], Error>) -> Void) {
+    public func fetchRocketLaunches(id: String, completion: @escaping (Result<Rocket, Error>) -> Void) {
 
-        let urlSuffix = "launches"
+        let urlSuffix = "rockets/\(id)"
 
         service?.sendGetRequest(table: urlSuffix,
                                 offset: offset) { [weak self] result in
-//            switch result {
-//            case let .failure(error):
-//                completion(.failure(error))
-//
-//            case let .success(plist):
-//                if let result = self?.parsePropertyList(plist) {
-//                    completion(result)
-//                }
-//            }
             self?.deserialize(result: result, completion: completion)
         }
     }
@@ -41,12 +32,7 @@ public class LauncherFetcher {
         switch result {
         case .success(let data):
             do {
-                let responseString = String(data: data, encoding: .utf8)
-                guard let result = responseString else { return }
-//                let jsonData = data.data(using: .utf8)
                 let decoder = JSONDecoder()
-                decoder.dateDecodingStrategy = .formatted(.iso8601Full)
-
                 let rawDict = try decoder.decode(T.self , from: data)
 
                 completion?(.success(rawDict))
@@ -58,7 +44,6 @@ public class LauncherFetcher {
                 completion?(.failure(AppError.unDecodableResponse))
             }
         case .failure(let error): completion?(.failure(error))
-
-    }
+        }
     }
 }

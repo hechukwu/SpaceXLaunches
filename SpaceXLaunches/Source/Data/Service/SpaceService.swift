@@ -13,6 +13,7 @@ public class SpaceService {
     // MARK: Public properties
 
     public private(set) lazy var launcherFetcher: LauncherFetcher = LauncherFetcher(service: self)
+    public private(set) lazy var rocketFetcher: RocketFetcher = RocketFetcher(service: self)
 
     // MARK: class initializer
 
@@ -58,51 +59,3 @@ public class SpaceService {
     }
 
 }
-
-    enum AppError: Error, LocalizedError {
-
-        case badRequestData
-        case badUrl
-        case endpointError(message: String)
-        case emptyResponseData
-        case unDecodableResponse
-        case unknownError
-        case networkError
-
-        public var errorDescription: String? {
-            switch self {
-            case .badRequestData:
-                return "The correct data could not be sent"
-            case .badUrl:
-                return "Incorrect destination"
-            case .endpointError(let message):
-                return message
-            case .emptyResponseData:
-                return "Response is empty"
-            case .unDecodableResponse:
-                return "The response could not be decoded"
-            case .unknownError:
-                return "An error occurred"
-            case .networkError:
-                return "Check your internet connection"
-            }
-        }
-
-    }
-
-//extension JSONDecoder {
-//
-//
-//     To remove the step of first converting to Data before calling JSONDecoder.decode() everywhere
-//     */
-//    func decode<T: Decodable>(_ type: T.Type, from dictionary: Dictionary<String, Any?>) -> T? {
-//        do {
-//            let data = try JSONSerialization.data(withJSONObject: dictionary, options: JSONSerialization.WritingOptions.prettyPrinted)
-//            return try decode(type, from: data)
-//        }
-//        catch {
-//            print(error)
-//            return nil
-//        }
-//    }
-//}

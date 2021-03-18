@@ -11,7 +11,7 @@ class SpaceXLaunchesViewController: BaseViewController {
     public var viewModel: SpaceXLaunchesViewModel? { didSet { bindViewModel() } }
 
     let disposeBag = DisposeBag()
-    var filteredLaunches = [SpaceXLaunches]()
+    var filteredLaunches = [Launch]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,10 +23,21 @@ class SpaceXLaunchesViewController: BaseViewController {
         registerNib()
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
 
+        ProgressDialog.show(with: "Please wait...")
         viewModel?.launches.bind({ (launches) in
+            ProgressDialog.hide()
             guard let keyDate = Calendar(identifier: .gregorian).date(byAdding: .year, value: -3, to: Date()) else { return }
             self.filteredLaunches = launches.filter{ $0.date_utc > keyDate }
             self.tableView.reloadData()
+        })
+
+        viewModel?.error.bind({ status in
+            if status {
+                self.tableView.isHidden = true
+                self.showAlertDialog(title: "Error", message: self.viewModel?.errorMessage.value)
+            } else {
+                self.tableView.isHidden = false
+            }
         })
     }
 
@@ -51,8 +62,8 @@ extension SpaceXLaunchesViewController: UITableViewDelegate, UITableViewDataSour
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let launch = filteredLaunches[indexPath.row]
-        if let vc = R.storyboard.main.spaceXDetailLaunchVC() {
-            vc.launch = launch
+        if let vc = R.storyboard.main.rocketLaunchVC() {
+            vc.viewModel = RocketLauncheViewModel(id: launch.rocket ?? "")
             navigationController?.pushViewController(vc, animated: true)
         }
     }
