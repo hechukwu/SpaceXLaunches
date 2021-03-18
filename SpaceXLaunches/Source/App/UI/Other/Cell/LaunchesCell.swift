@@ -22,7 +22,7 @@ class LaunchesCell: UITableViewCell {
     func configureCell(_ launch: Launch) {
         launchNumberLabel.text = "\(launch.flight_number ?? 0)"
         detailsLabel.text = launch.details
-        indicatorLabel.text = "\(launch.upcoming ?? false)"
+        indicatorLabel.text = "Upcoming: \(launch.upcoming ?? false)"
         dateLabel.text = DateUtils.parseEventVerificationDate(date: launch.date_utc)
     }
 }

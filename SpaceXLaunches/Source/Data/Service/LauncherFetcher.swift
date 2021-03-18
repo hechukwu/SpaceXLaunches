@@ -40,9 +40,6 @@ public class LauncherFetcher {
                 completion?(.success(rawDict))
 
             } catch {
-                let dataAsString = String(data: data, encoding: .utf8) ?? "<No data>"
-                print("ApiClient handleResponse() catch: error: \(error.localizedDescription)")
-
                 completion?(.failure(AppError.unDecodableResponse))
             }
         case .failure(let error): completion?(.failure(error))

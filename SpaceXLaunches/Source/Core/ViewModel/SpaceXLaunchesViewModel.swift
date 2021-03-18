@@ -40,6 +40,7 @@ public class SpaceXLaunchesViewModel: SpaceObservableViewModelProtocol {
             switch result {
             case .failure: break
             case .success(let launches): self.launches.value = launches
+                self.coreDataStack.upsertLaunch(launches, save: true)
             }
         }
     }
