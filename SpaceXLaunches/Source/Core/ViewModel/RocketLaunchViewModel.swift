@@ -38,7 +38,7 @@ public class RocketLauncheViewModel: RocketObservableViewModelProtocol {
     }
 
     func setError(_ message: String) {
-        self.errorMessage = Observable(message)
-        self.error = Observable(true)
+        self.errorMessage.value = message
+        self.error.value = true
     }
 }
