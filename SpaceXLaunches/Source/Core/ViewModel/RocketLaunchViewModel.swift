@@ -14,7 +14,6 @@ public class RocketLauncheViewModel: RocketObservableViewModelProtocol {
     var errorMessage: Observable<String?> = Observable(nil)
     var error: Observable<Bool> = Observable(false)
 
-    var apiManager: SpaceXClient?
     var rocket: Observable<Rocket> = Observable(Rocket())
 
     // MARK: Public Instance Properties
