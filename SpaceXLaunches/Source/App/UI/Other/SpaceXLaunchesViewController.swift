@@ -31,15 +31,6 @@ class SpaceXLaunchesViewController: BaseViewController {
             self.filteredLaunches = launches.filter{ $0.date_utc > keyDate }
             self.tableView.reloadData()
         })
-
-        viewModel?.error.bind({ status in
-            if status {
-                self.tableView.isHidden = true
-                self.showAlertDialog(title: "Error", message: self.viewModel?.errorMessage.value)
-            } else {
-                self.tableView.isHidden = false
-            }
-        })
     }
 
     private func registerNib() {

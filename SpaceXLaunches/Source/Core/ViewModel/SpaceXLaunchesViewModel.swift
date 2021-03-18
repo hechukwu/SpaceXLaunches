@@ -3,45 +3,44 @@ import RxSwift
 
 protocol SpaceObservableViewModelProtocol {
     func fetchSpaceLaunches()
-    func setError(_ message: String)
     var launches: Observable<[Launch]> { get  set }
-    var errorMessage: Observable<String?> { get set }
-    var error: Observable<Bool> { get set }
 }
 
 public class SpaceXLaunchesViewModel: SpaceObservableViewModelProtocol {
 
-    var errorMessage: Observable<String?> = Observable(nil)
-    var error: Observable<Bool> = Observable(false)
-
-    var apiManager: SpaceXClient?
     var launches: Observable<[Launch]> = Observable([])
 
     // MARK: Public Instance Properties
 
     public let spaceClient: SpaceXClientProtocol?
+    let coreDataStack = CoreDataStack()
 
     // MARK: Public Initializers
 
     public init(apiClient: SpaceXClientProtocol) {
         self.spaceClient = apiClient
+        fetchLaunchesFromCoreData()
         fetchSpaceLaunches()
     }
 
     // MARK: Internal Instance Methods
 
+    func fetchLaunchesFromCoreData() {
+        if let launches = coreDataStack.getLaunches() {
+            let contents: [Launch] = launches.map {
+                return $0.toWorkSpaceModel()
+            }
+            self.launches.value = contents
+        }
+    }
+
     func fetchSpaceLaunches() {
 
         spaceClient?.fetchLauncher { (result) in
             switch result {
-            case .failure(let error): self.setError(error.localizedDescription)
+            case .failure: break
             case .success(let launches): self.launches.value = launches
             }
         }
-    }
-
-    func setError(_ message: String) {
-        self.errorMessage = Observable(message)
-        self.error = Observable(true)
     }
 }

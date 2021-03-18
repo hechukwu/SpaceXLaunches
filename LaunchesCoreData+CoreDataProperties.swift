@@ -32,3 +32,34 @@ extension LaunchesCoreData {
     @NSManaged public var date_utc: Date?
 
 }
+
+extension LaunchesCoreData {
+    func toWorkSpaceModel() -> Launch {
+        let model = Launch(fairings: nil,
+                           links: nil,
+                           static_fire_date_utc:
+                            static_fire_date_utc,
+                           rocket: rocket,
+                           details: details,
+                           launchpad: launchpad,
+                           name: name,
+                           date_local: date_local,
+                           date_precision: date_precision,
+                           id: id,
+                           tdb: tdb,
+                           net: net,
+                           success: nil,
+                           auto_update: auto_update,
+                           upcoming: upcoming,
+                           window: nil,
+                           flight_number: nil,
+                           date_utc: date_utc ?? Date(),
+                           crew: nil,
+                           ships: nil,
+                           capsules: nil,
+                           payloads: nil,
+                           cores: nil)
+
+        return model
+    }
+}
