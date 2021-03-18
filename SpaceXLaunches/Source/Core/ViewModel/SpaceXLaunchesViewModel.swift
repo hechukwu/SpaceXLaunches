@@ -19,11 +19,12 @@ public class SpaceXLaunchesViewModel: SpaceObservableViewModelProtocol {
 
     // MARK: Public Instance Properties
 
-    public let spaceClient = SpaceXClient()
+    public let spaceClient: SpaceXClientProtocol?
 
     // MARK: Public Initializers
 
-    public init() {
+    public init(apiClient: SpaceXClientProtocol) {
+        self.spaceClient = apiClient
         fetchSpaceLaunches()
     }
 
@@ -31,7 +32,7 @@ public class SpaceXLaunchesViewModel: SpaceObservableViewModelProtocol {
 
     func fetchSpaceLaunches() {
 
-        spaceClient.fetchLauncher { (result) in
+        spaceClient?.fetchLauncher { (result) in
             switch result {
             case .failure(let error): self.setError(error.localizedDescription)
             case .success(let launches): self.launches.value = launches
