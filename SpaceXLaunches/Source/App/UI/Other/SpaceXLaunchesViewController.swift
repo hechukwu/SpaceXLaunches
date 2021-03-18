@@ -12,6 +12,7 @@ class SpaceXLaunchesViewController: BaseViewController {
 
     let disposeBag = DisposeBag()
     var filteredLaunches = [Launch]()
+    let spaceXClient = SpaceXClient()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,13 +20,13 @@ class SpaceXLaunchesViewController: BaseViewController {
         tableView.dataSource = self
         tableView.tableFooterView = UIView()
 
-        viewModel = SpaceXLaunchesViewModel()
+        viewModel = SpaceXLaunchesViewModel(apiClient: spaceXClient)
         registerNib()
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
 
         ProgressDialog.show(with: "Please wait...")
         viewModel?.launches.bind({ (launches) in
-            ProgressDialog.hide()
+//            ProgressDialog.hide()
             guard let keyDate = Calendar(identifier: .gregorian).date(byAdding: .year, value: -3, to: Date()) else { return }
             self.filteredLaunches = launches.filter{ $0.date_utc > keyDate }
             self.tableView.reloadData()
@@ -63,7 +64,7 @@ extension SpaceXLaunchesViewController: UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let launch = filteredLaunches[indexPath.row]
         if let vc = R.storyboard.main.rocketLaunchVC() {
-            vc.viewModel = RocketLauncheViewModel(id: launch.rocket ?? "")
+            vc.viewModel = RocketLauncheViewModel(id: launch.rocket ?? "", apiClient: spaceXClient)
             navigationController?.pushViewController(vc, animated: true)
         }
     }

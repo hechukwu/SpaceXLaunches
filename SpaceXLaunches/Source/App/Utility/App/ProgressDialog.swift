@@ -5,7 +5,7 @@ final class ProgressDialog {
     static func show(with message: String?) {
         DispatchQueue.main.async {
             SVProgressHUD.show(withStatus: message)
-            SVProgressHUD.setDefaultMaskType(.black)
+            SVProgressHUD.setDefaultMaskType(.custom)
         }
     }
 

@@ -19,16 +19,17 @@ public class RocketLauncheViewModel: RocketObservableViewModelProtocol {
 
     // MARK: Public Instance Properties
 
-    public let spaceClient = SpaceXClient()
+    public let spaceClient: SpaceXClientProtocol?
 
     // MARK: Public Initializers
 
-    public init(id: String) {
+    public init(id: String, apiClient: SpaceXClientProtocol) {
+        self.spaceClient = apiClient
         fetchRocketLaunched(id: id)
     }
 
     func fetchRocketLaunched(id: String) {
-        spaceClient.fetchRocket(id: id) { result in
+        spaceClient?.fetchRocket(id: id) { result in
 
             switch result {
             case .failure(let error): self.setError(error.localizedDescription)

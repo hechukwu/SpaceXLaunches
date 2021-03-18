@@ -1,9 +1,12 @@
 import Dispatch
 import UIKit
 
-public class SpaceXClient {
+public protocol SpaceXClientProtocol {
+    func fetchLauncher(completion: @escaping (Result<[Launch], Error>) -> Void)
+    func fetchRocket(id: String, completion: @escaping (Result<Rocket, Error>) -> Void)
+}
 
-    private var rocketLaunchedList = [Launch]()
+public class SpaceXClient: SpaceXClientProtocol {
 
     // MARK: Private Instance Property
 
