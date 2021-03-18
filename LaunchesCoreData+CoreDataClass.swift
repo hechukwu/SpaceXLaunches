@@ -1,11 +1,3 @@
-//
-//  LaunchesCoreData+CoreDataClass.swift
-//  SpaceXLaunches
-//
-//  Created by Henry Chukwu on 18/03/2021.
-//
-//
-
 import Foundation
 import CoreData
 

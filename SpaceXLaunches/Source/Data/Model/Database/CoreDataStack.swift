@@ -58,6 +58,7 @@ class CoreDataStack: NSObject {
         launchObject.upcoming = launch.upcoming ?? false
         launchObject.date_precision = launch.date_precision
         launchObject.rocket = launch.rocket
+        launchObject.flight_number = Int64(launch.flight_number ?? 0)
 
         if save {
             saveContext()

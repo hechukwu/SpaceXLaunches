@@ -26,7 +26,7 @@ class SpaceXLaunchesViewController: BaseViewController {
 
         ProgressDialog.show(with: "Please wait...")
         viewModel?.launches.bind({ (launches) in
-//            ProgressDialog.hide()
+            ProgressDialog.hide()
             guard let keyDate = Calendar(identifier: .gregorian).date(byAdding: .year, value: -3, to: Date()) else { return }
             self.filteredLaunches = launches.filter{ $0.date_utc > keyDate }
             self.tableView.reloadData()
