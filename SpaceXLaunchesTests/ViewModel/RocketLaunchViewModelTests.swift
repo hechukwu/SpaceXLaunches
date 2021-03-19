@@ -20,4 +20,10 @@ class RocketLaunchViewModelTests: XCTestCase {
         XCTAssertNotNil(viewModel.rocket.value)
     }
 
+    func test_whenInitialized_fetchRocketLaunched_getsCalled() {
+        let viewModel = createViewModel(SpaceXClientTests())
+        if let name = viewModel.rocket.value.name {
+            XCTAssert(name == "Double 007")
+        }
+    }
 }

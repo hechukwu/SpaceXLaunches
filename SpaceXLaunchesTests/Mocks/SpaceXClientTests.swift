@@ -11,8 +11,10 @@ import Foundation
 class SpaceXClientTests: SpaceXClientProtocol {
 
     func fetchLauncher(completion: @escaping (Result<[Launch], Error>) -> Void) {
+        completion(.success(TestData.launches))
     }
 
     func fetchRocket(id: String, completion: @escaping (Result<Rocket, Error>) -> Void) {
+        completion(.success(TestData.rocket))
     }
 }
