@@ -20,4 +20,13 @@ class SpaceXLaunchesViewModelTests: XCTestCase {
         XCTAssertNotNil(viewModel.launches.value)
     }
 
+    func test_whenInitialized_fetchSpaceLaunches_getsCalled() {
+        let viewModel = createViewModel(SpaceXClientTests())
+        XCTAssertNotNil(viewModel.spaceClient)
+        XCTAssert(viewModel.launches.value.count == 3)
+
+        if let launch = viewModel.launches.value.first {
+            XCTAssert(launch.name == "Demo Mission 2")
+        }
+    }
 }
